@@ -2,7 +2,7 @@
 title: Jelliy Blog
 SEOTitle: Jelliy Blog
 header-img: img/home-bg.jpg
-email: jili3731@163.com
+#email: jili3731@163.com
 description: "每天晒太阳"
 keyword: "Jelliy, 博客"
 url: "https://jelliy.github.io/"              # your host, for absolute URL
@@ -48,7 +48,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: hux
+#disqus_username: hux
 
 # Netease setttings
 netease_comment: false
@@ -60,8 +60,8 @@ netease_comment: false
 # ba_track_id: [your track id]
 
 # Google Analytics
-ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
-ga_domain: huangxuan.me
+#ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
+#ga_domain: https://jelliy.github.io/
 
 
 
@@ -73,8 +73,8 @@ sidebar-avatar: /img/      # use absolute URL, seeing it's used in both `/` and 
 
 
 # Featured Tags
-featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
+#featured-tags: true                     # whether or not using Feature-Tags
+#featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 
 
@@ -87,13 +87,13 @@ service-worker: true
 # Friends
 friends: [
     {
-    #     title: "Su",
-    #     href: "http://su.gallery/"
-    # },{
-        title: "乱序",
-        href: "http://mida.re/"
+        title: "ZZZZZch",
+        href: "https://ZZZZZch.github.io/"
     },{
-        title: "前端外刊评论",
-        href: "http://qianduan.guru/"
+        title: "topgunforone",
+        href: "https://topgunforone.github.io/"
     },{
+        title: "KyrieHee",
+        href: "https://kyriehee.github.io/"
+    }
 ]
