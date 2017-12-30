@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "博客的搭建"
-subtitle:     "------记录搭建博客的流程"
+subtitle:     "      记录搭建博客的流程"
 date:         2017-12-23 22:00:00
 author:       "Jelliy"
 header-img:   "img/home-bg-ai2.jpeg"
@@ -9,9 +9,7 @@ header-mask:  0.3
 catalog:      true
 multilingual: false
 tags:
-    - Linux
-    - Blog
-    - Notes
+    - 杂项
 ---
 
 
@@ -106,10 +104,20 @@ jekyll本地环境搭建,见官网https://jekyllrb.com/docs/quickstart/
 
 [favicon](https://tool.lu/favicon/) icon在线制作
 
+
+## MathJax
+
+在_layouts/default.html中添加
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+然后，再使用Tex写公式。
+$$公式$$表示行间公式，\\(公式\\)表示行内公式。
+
 ## 参考
 
-[如何在github上搭建自己的博客](https://www.cnblogs.com/EX32/p/4479712.html)
-[通过GitHub Pages建立个人站点（详细步骤](https://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html)
-[Ubuntu14.04+Jekyll+Github Pages搭建静态博客](https://www.cnblogs.com/mo-wang/p/5115266.html)
-[Jekyll 博客搭建笔记 1](https://segmentfault.com/a/1190000011629270)
+1. [如何在github上搭建自己的博客](https://www.cnblogs.com/EX32/p/4479712.html)
+2. [通过GitHub Pages建立个人站点（详细步骤](https://www.cnblogs.com/purediy/archive/2013/03/07/2948892.html)
+3. [Ubuntu14.04+Jekyll+Github Pages搭建静态博客](https://www.cnblogs.com/mo-wang/p/5115266.html)
+4. [Jekyll 博客搭建笔记 1](https://segmentfault.com/a/1190000011629270)
 
