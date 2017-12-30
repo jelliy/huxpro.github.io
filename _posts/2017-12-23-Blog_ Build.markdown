@@ -73,16 +73,18 @@ jekyll本地环境搭建,见官网https://jekyllrb.com/docs/quickstart/
 > Git是一种分布式版本控制系统，由大名鼎鼎的Linux操作系统创建人Linus Torvalds编写，当时的目的是用来管理Linux内核的源码。
 > Github是全球知名的使用Git系统的一个免费远程仓库（Repository），倡导开源理念，若要将自己的代码仓库私有则需付费。
 
-4.Git基本配置
-配置本机git的两个重要信息，user.name和user.email,中终端输入如下命令即可设置
-git config --global user.name "Your Name"
-git config --global user.email "email@example.com"
+### Git基本配置
 
-克隆代码
+配置本机git的两个重要信息，user.name和user.email,中终端输入如下命令即可设置
+
+1. git config --global user.name "Your Name"
+2. git config --global user.email "email@example.com"
+
+### 克隆代码
 
 1. git clone <版本库的网址> <本地目录名>
 
-将服务器代码更新本地
+### 将服务器代码更新本地
 
 1. git status（查看本地分支文件信息，确保更新时不产生冲突）
 2. git checkout -- [file name] (若文件有修改，可以还原到最初状态; 若文件需要更新到服务器上，应该先merge到服务器，再更新到本地)
@@ -90,7 +92,7 @@ git config --global user.email "email@example.com"
 4. git checkout [remote branch] (若分支为本地分支，则需切换到服务器的远程分支)
 5. git pull
 
-将本地代码更新服务器
+### 将本地代码更新服务器
 
 1. git add.
 2. git commit -am "修改说明"
@@ -100,7 +102,9 @@ git config --global user.email "email@example.com"
 
 ## 工具
 
-Pandoc
+[pandoc](https://github.com/jgm/pandoc) 一个开源的文档格式转换工具
+
+[favicon](https://tool.lu/favicon/) icon在线制作
 
 ## 参考
 
