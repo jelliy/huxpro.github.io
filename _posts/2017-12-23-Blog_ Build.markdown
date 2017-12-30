@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "博客的搭建"
-subtitle:     "      记录搭建博客的流程"
+subtitle:     "---记录搭建博客的流程"
 date:         2017-12-23 22:00:00
 author:       "Jelliy"
 header-img:   "img/home-bg-ai2.jpeg"
@@ -110,9 +110,6 @@ jekyll本地环境搭建,见官网https://jekyllrb.com/docs/quickstart/
 在_layouts/default.html中添加
 <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
 </script>
-
-然后，再使用Tex写公式。
-$$公式$$表示行间公式，\\(公式\\)表示行内公式。
 
 ## 参考
 

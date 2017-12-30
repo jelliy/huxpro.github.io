@@ -10,7 +10,6 @@ catalog:      true
 multilingual: false
 tags:
     - Linux
-    - Shell
 ---
 
 
