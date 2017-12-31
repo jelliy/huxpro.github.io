@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "神经网络"
-subtitle:     "------摘自[UFLDL教程]"
+subtitle:     "—— Neuarl Networks"
 date:         2017-12-28 23:00:00
 author:       "Jelliy"
 header-img:   "img/port-bg-starry sky.jpg"
@@ -188,8 +188,7 @@ $$
         \frac{1}{2} \left\|y - h_{W,b}(x)\right\|^2 = - (y_i - a^{(n_l)}_i) \cdot f'(z^{(n_l)}_i)
 \end{align}$$
 
-> 
-$$
+> $$
 \begin{align}
 \delta^{(n_l)}_i &= \frac{\partial}{\partial z^{n_l}_i}J(W,b;x,y)
  = \frac{\partial}{\partial z^{n_l}_i}\frac{1}{2} \left\|y - h_{W,b}(x)\right\|^2 \\
@@ -206,8 +205,7 @@ $$
 \delta^{(l)}_i = \left( \sum_{j=1}^{s_{l+1}} W^{(l)}_{ji} \delta^{(l+1)}_j \right) f'(z^{(l)}_i)
 $$
 
-> 
-$$
+> $$
 \begin{align}
 \delta^{(n_l-1)}_i &=\frac{\partial}{\partial z^{n_l-1}_i}J(W,b;x,y)
  = \frac{\partial}{\partial z^{n_l-1}_i}\frac{1}{2} \left\|y - h_{W,b}(x)\right\|^2 
@@ -224,8 +222,7 @@ $$
 $$
 将上式中的\\(n_l-1\\)与\\(n_l\\)的关系替换为\\(l\\)与\\(l+1\\)的关系，就可以得到：
 $$ 
-\delta^{(l)}_i = \left( \sum_{j=1}^{s_{l+1}} W^{(l)}_{ji} \delta^{(l+1)}_j \right) f'(z^{(l)}_i)
-$$
+\delta^{(l)}_i = \left( \sum_{j=1}^{s_{l+1}} W^{(l)}_{ji} \delta^{(l+1)}_j \right) f'(z^{(l)}_i)$$
 
 > 以上逐次从后向前求导的过程即为“反向传导”的本意所在。
 
@@ -266,8 +263,6 @@ $$ \begin{align}
 \nabla_{W^{(l)}} J(W,b;x,y) &= \delta^{(l+1)} (a^{(l)})^T, \\
 \nabla_{b^{(l)}} J(W,b;x,y) &= \delta^{(l+1)}.
 \end{align}$$
-
-
 
 **实现中应注意：**在以上的第2步和第3步中，我们需要为每一个 \\(i\\) 值计算其 \\(f'(z^{(l)}_i)\\)。假设 \\(f(z)\\) 是sigmoid函数，并且我们已经在前向传导运算中得到了 \\(a^{(l)}_i\\)。那么，使用我们早先推导出的 \\(f'(z)\\)表达式，就可以计算得到 \\(f'(z^{(l)}_i) = a^{(l)}_i (1- a^{(l)}_i)\\)。
 

@@ -1,0 +1,234 @@
+---
+layout:       post
+title:        "广义线性模型"
+subtitle:     "—— Generalized Linear Models"
+date:         2017-12-28 12:00:00
+author:       "Jelliy"
+header-img:   "img/port-bg-starry sky.jpg"
+header-mask:  0.3
+catalog:      true
+multilingual: false
+tags:
+    - 深度学习
+---
+
+## 指数分布族
+
+指数分布族指概率分布满足以下形式的分布
+
+$$p(y;\eta)=b(y)\exp(\eta^T T(y)-a(\eta))$$
+
+y是随机变量
+η为自然参数(nature parameter)，也称为标准参数（canonical parameter）
+T(y)是充分统计量（sufficient statistic）,通常T(y)=y。
+a(η)被称为对数配分函数（partition function ），实际上它是归一化因子的对数形式。它使得概率分布积分为1的条件得到满足。
+当参数A，h，T都固定以后，就定义了一个以η为参数的函数族。
+
+许多其他分部也属于指数分布族，例如：伯努利分布（Bernoulli）、高斯分布（Gaussian）、多项式分布（Multinomial）、泊松分布（Poisson）、伽马分布（Gamma）、指数分布（Exponential）、β分布、Dirichlet分布、Wishart分布。
+
+### 伯努利分布
+
+伯努利分布是对0，1分布的问题进行建模。对于\\(Bernouli(\phi),y\in\{0,1\}\\)，其概率密度函数如下：
+ 
+$$\begin{cases} p(y=0;\phi) = 1-\phi \\ 
+p(y=1;\phi) = \phi \end{cases}$$
+
+把伯努利分布可以写成指数族分布的形式
+
+$$\begin{align}
+p(y,\phi) & = \phi^y (1 - \phi)^{(1-y)} \\
+& = exp(log\phi^y(1-\phi)^{(1-y)}) \\
+& = exp(ylog\phi + (1-y)log(1-\phi)) \\
+& = exp(ylog\frac{\phi}{1-\phi} + log(1-\phi))
+\end{align}$$
+
+将上式与指数族分布形式比对，可知：
+
+$$
+T(y) = y \\ 
+\eta=\log \frac{\phi}{1-\phi}  \\
+a(\eta) = -\log(1-\phi)=\log(1+e^\eta)  \\ 
+b(y)=1
+$$
+
+### 高斯分布
+
+高斯分布也可以写为指数族分布的形式如下:
+
+$$\begin{align}
+p(y;\mu) & =\frac{1}{\sqrt{2\pi}}\exp(-\frac{1}{2}(y-\mu)^2) \\
+ & =\frac{1}{\sqrt{2\pi}} \exp(-\frac{1}{2} y^2)\exp(\mu y-\frac{1}{2} \mu^2)
+\end{align}$$
+
+将上式与指数族分布形式比对，可知：
+
+$$
+\eta = \mu  \\
+T(y) = y \\
+a(\eta) = \mu^2/2 = \eta^2 /2 \\
+b(y)=\frac{1}{\sqrt{2\pi}} \exp(-\frac{1}{2} y^2)
+$$
+
+## 广义线性模型
+
+通过上面两个例子我们可以看出，在伯努利的指数分布族形式中，θ 与伯努利分布中的参数φ是一个logistic函数。而在高斯分布的指数分布族形式中，θ是与μ相等的一个 表达式 （前提是我们假设了σ=1）。通过以上的例子，θ以不同的映射函数与其它概率分布函数中的参数发生联系，从而得到不同的模型，广义线性模型正是将指数分布族中的所有成员（每个成员正好有一个这样的联系）都作为线性模型的扩展，通过各种非线性的连接函数将线性函数映射到其他空间，从而大大扩大了线性模型可解决的问题。
+
+下面我们看 GLM 的形式化定义，GLM 有三个假设：
+
+1. \\(y\|x;\theta\sim ExponentialFamily（\eta）\\)：固定参数θ，在给定x的情况下，y服从指数分布族（The exponential family）中以η为参数的某个分布。
+2. 给定一个x，我们需要的目标函数为\\(h_{\theta}(x)=E[T(y)|x]\\)，后者为该分布的期望。
+令\\(\eta=\theta^Tx\\)。
+3. 自然参数η与输入特征x呈线性相关，即
+实数时，\\(\eta=\theta^Tx \\)
+向量时，\\(\eta_i=\theta_i^Tx \\)
+
+在这三个假设（也可以理解为一种设计）的前提下，我们可以推导出一系列学习算法，称之为广义线性模型(GLM)。下面我们可以推导出一系列算法，称之为广义线性模型GLM. 下面举两个例子：
+
+### 最小二乘法
+
+假设 \\(p(y \| x;\theta) \sim N(\mu,\sigma^2)\\), u 可能依赖于x,那么
+
+$$\begin{align}
+h_\theta(x) & = E[y|x;\theta]    \\ 
+& =\mu \\
+& =\eta \\
+& = \theta^T x
+\end{align}$$
+
+
+### 逻辑回归 LR
+
+考虑LR二分类问题，y∈0,1, 因为是二分类问题，我们很自然的选择p(y\|x;θ)~Bernoulli(ϕ),即服从伯努利分布。那么
+
+$$\begin{align}
+h_\theta(x) & = E[T(y)|x] \\ 
+& = E[y|x]  \\
+& = p(y = 1 |x;\theta) \\
+& = \phi \\
+& = \frac{1}{1 + e^{-\eta}} \\
+& = \frac{1}{1 + e^{-\theta^T}x}
+\end{align}$$
+
+
+总之，广义线性模型通过拟合响应变量的条件均值的一个函数（不是响应变量的条件均值），并假设响应变量服从指数分布族中的某个分布（不限于正态分布），从而极大地扩展了标准线性模型。模型参数估计的推导依据是极大似然估计，而非最小二乘法。
+
+### 多分类模型 Softmax Regression
+
+下面再给出GLM的一个例子——Softmax Regression.
+
+假设一个分类问题，y可取k个值，即\\(y \epsilon\{1,2,...,k\}\\)。现在考虑的不再是一个二分类问题，现在的类别可以是多个。如邮件分类：垃圾邮件、个人邮件、工作相关邮件。下面要介绍的是多项式分布（multinomial distribution）。
+
+多项式分布推导出的GLM可以解决多类分类问题，是 logistic 模型的扩展。对于多项式分布中的各个y的取值，我们可以使用k个参数\\(\phi_{1},\phi_{2},...,\phi_{k}\\)来表示这k个取值的概率。即
+
+$$p(y=i) = \phi_{i}$$
+
+但是，这些参数可能会冗余，更正式的说可能不独立，因为\\(\sum\phi_{i}=1\\)，知道了前k-1个，就可以通过\\(\phi_{k} = 1- \sum_{i=1}^{k-1}\phi_{i}\\)计算出第k个概率。所以，我们只假定前k-1个结果的概率参数\\(\phi_{1},\phi_{2},...,\phi_{k}\\)，第k个输出的概率通过下面的式子计算得出：
+
+
+$$\phi_{k} = 1- \sum_{i=1}^{k-1}\phi_{i}$$
+
+ 
+为了使多项式分布能够写成指数分布族的形式，我们首先定义 T(y)，如下所示：
+
+$$\begin{align}
+T(1)=\left[ \begin{matrix}1\\0\\0\\\vdots\\0\end{matrix}\right],
+T(2)=\left[ \begin{matrix}0\\1\\0\\\vdots\\0\end{matrix}\right],\cdots,
+T(k-1)=\left[ \begin{matrix}0\\0\\0\\\vdots\\1\end{matrix}\right],
+T(k)=\left[ \begin{matrix}0\\0\\0\\\vdots\\0\end{matrix}\right]
+\end{align}$$
+
+
+和之前的不一样，这里我们的T(y)不等y，T(y)现在是一个k−1维的向量，而不是一个真实值。接下来，我们将使用(T(y))i表示T(y)的第i个元素。
+
+下面我们引入指数函数I，使得：
+
+$$I\begin{Bmatrix} True \end{Bmatrix} =1,I\begin{Bmatrix}False \end{Bmatrix}=0$$
+
+这样T(y)中的某个元素可以表示成： 
+
+$$\begin{align}
+T(y)_i=I\begin{Bmatrix} y=i \end{Bmatrix}
+\end{align}$$
+
+举例来说，当y=2时，\\(T(2)_2=I\begin{Bmatrix}2=2\end{Bmatrix}=1，T(2)_3=I\begin{Bmatrix}2=3\end{Bmatrix}=0\\)。我们还可以得到
+
+$$E[T(y)_{i}]=\sum_{y=1}^{k}T(y)_{i}{\phi}_i=\sum_{y=1}^{k}I\begin{Bmatrix}y=i\end{Bmatrix}\phi_i=\phi_i$$
+
+$$\sum_{i=1}^{k}I\begin{Bmatrix} y=i \end{Bmatrix} =1$$
+
+于是我们进一步得到具体的多项式分布的概率分布： 
+
+$$\begin{align}
+p(y;\phi)&=\phi_1^{I\begin{Bmatrix} y=1\end{Bmatrix}}\phi_2^{I\begin{Bmatrix} y=2\end{Bmatrix}}\cdots\phi_k^{I\begin{Bmatrix} y=k \end{Bmatrix}}\\
+&=\phi_1^{I\begin{Bmatrix} y=1\end{Bmatrix}}\phi_2^{I\begin{Bmatrix} y=2\end{Bmatrix}}\cdots\phi_k^{1-\sum_{i=1}^{k-1}I\begin{Bmatrix} y=i\end{Bmatrix}}\\
+&=\phi_1^{T(y)_1}\phi_2^{T(y)_2}\cdots\phi_k^{1-\sum_{i=1}^{k-1}T(y)_i}
+\end{align}$$
+
+
+将概率分布表示成指数分布族的形式： 
+
+$$\begin{align}
+p(y;\phi)&=\phi_1^{T(y)_1}\phi_2^{T(y)_2}\cdots\phi_k^{1-\sum_{i=1}^{k-1}T(y)_i}\\
+&=\exp(T(y)_1\log\phi_1+T(y)_2\log\phi_2+\cdots+((1-\sum_{i=1}^{k-1}T(y)_i)\log\phi_k)\\
+&=\exp(T(y)_1\log\frac{\phi_1}{\phi_k}+T(y)_2\log\frac{\phi_2}{\phi_k}+\cdots+T(y)_{k-1}\log\frac{\phi_{k-1}}{\phi_k}+\log\phi_k)\\
+&=b(y)\exp(\eta^TT(y)-a(\eta)) 
+\end{align}$$
+
+我们有：
+
+$$\begin{align}
+\eta&=\left[ \begin{matrix}\log\frac{\phi_1}{\phi_k}\\\log\frac{\phi_2}{\phi_k}\\\vdots\\\log\frac{\phi_{k-1}}{\phi_k}\end{matrix}\right]\\
+a(\eta)&=-\log\phi_k\\
+b(y)&=1 
+\end{align}$$
+
+向量η的第i个元素为： 
+
+$$\eta_i=\log\frac{\phi_i}{\phi_k}\Longrightarrow e^{\eta_i}=\frac{\phi_i}{\phi_k}$$
+
+令其累加，得到：
+
+$$\sum_{i=1}^ke^{\eta_i}=\frac{\sum_{i=1}^k\phi_i}{\phi_k}=\frac{1}{\phi_k}\Longrightarrow \phi_k=\frac{1}{\sum_{i=1}^ke^{\eta_i}}$$
+
+多项式分布的期望：
+
+$$\phi_i=\frac{e^{\eta_i}}{\sum_{i=1}^ke^{\eta_i}}$$
+
+
+注意到，上式中的每个参数\\(\eta_i\\)都是一个可用线性向量\\(\eta=\theta^Tx\\)表示出来的，因而这里的\\(\theta\\)其实是一个二维矩阵。
+于是，我们可以得到假设函数 h 如下：
+
+$$\begin{align}
+h_\theta(x)&=E\left[T(y)\mid x;\theta\right]\\
+&=E\left[ \begin{matrix}p(y=1\mid x;\theta)\\p(y=2\mid x;\theta)\\\vdots\\p(y={k-1}\mid x;\theta)\end{matrix}\right]\\
+&=\left[ \begin{matrix}\phi_1\\\phi_2\\\vdots\\\phi_{k-1}\end{matrix}\right]\\
+ &=\left[ \begin{matrix}\frac{e^{\eta_1}}{\sum_{i=1}^ke^{\eta_i}}\\\frac{e^{\eta_2}}{\sum_{i=1}^ke^{\eta_i}}\\\vdots\\\frac{e^{\eta_{k-1}}}{\sum_{i=1}^ke^{\eta_i}}\end{matrix}\right]
+=\left[ \begin{matrix}\frac{e^{\theta_1^Tx}}{\sum_{i=1}^ke^{\theta_i^Tx}}\\\frac{e^{\theta_2^Tx}}{\sum_{i=1}^ke^{\theta_i^Tx}}\\\vdots\\\frac{e^{\theta_{k-1}^Tx}}{\sum_{i=1}^ke^{\theta_i^Tx}}\end{matrix}\right]
+\end{align}$$
+
+那么如何根据假设函数h求得参数\\(\theta\\),当然还是最大似然函数的方法，最大似然函数如下：
+
+$$l(\theta)=\prod_{i=1}^{m}p(y^{(i)}|x^{(i)};\theta)=\prod_{i=1}^{m}\prod_{j=1}^{k}\phi_j^{I\begin{Bmatrix}y^{(i)}=j\end{Bmatrix}}$$
+
+取对数
+
+$$\begin{align}
+L(\theta)&=log\prod_{i=1}^{m}p(y^{(i)}|x^{(i)};\theta) \\
+& = \sum_{i=1}^{m}log(p(y^{(i)}|x^{(i)};\theta)) \\
+& =\sum_{i=1}^{m}\sum_{j=1}^{k}{I\begin{Bmatrix}y^{(i)}=j\end{Bmatrix}}{\cdot}log{\frac{e^{\theta_j^{T}x^{(i)}}}{\sum_{l=1}^{k}e^{\theta_l^{T}x^{(i)}}}}
+\end{align}$$
+
+代价函数为：
+
+$$J(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\sum_{j=1}^{k}{I\begin{Bmatrix}y^{(i)}=j\end{Bmatrix}}{\cdot}log{\frac{e^{\theta_j^{T}x^{(i)}}}{\sum_{l=1}^{k}e^{\theta_l^{T}x^{(i)}}}}$$
+
+对该式子可以使用梯度下降算法或者牛顿方法求得参数θ后，使用假设函数h对新的样例进行预测，即可完成多类分类任务。这种多种分类问题的解法被称为 softmax regression.
+
+## 参考
+
+[线性回归、logistic回归、广义线性模型——斯坦福CS229机器学习个人总结（一）](http://blog.csdn.net/sinat_37965706/article/details/69204397)
+
+[牛顿方法、指数分布族、广义线性模型—斯坦福ML公开课笔记4](http://blog.csdn.net/stdcoutzyx/article/details/9207047)
+
+[指数分布族（The Exponential Family)与广义线性回归（Generalized Linear Model GLM）](http://blog.csdn.net/bitcarmanlee/article/details/51292380)
+

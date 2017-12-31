@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "linux常用命令"
-subtitle:     "------ubuntu 16.04"
+subtitle:     "——  Basic Linux commands(ubuntu 16.04)"
 date:         2017-12-23 23:00:00
 author:       "Jelliy"
 header-img:   "img/port-bg-starry sky.jpg"

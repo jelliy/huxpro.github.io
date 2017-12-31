@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "博客的搭建"
-subtitle:     "---记录搭建博客的流程"
+subtitle:     "—— Set up your own blog"
 date:         2017-12-23 22:00:00
 author:       "Jelliy"
 header-img:   "img/home-bg-ai2.jpeg"
@@ -56,6 +56,8 @@ fork之后，需要更改的内容网上教程很多，readme中也有介绍。�
 用markdown可以避开HTML，转而使用更加直观的Markdown语法。如果不熟悉Markdown语法也没关系，可以参见这份[Markdown语法说明](http://wowubuntu.com/markdown/)
 
 [Cmd Markdown 在线版本](https://www.zybuluo.com/mdeditor)
+
+[Markdown中数学公式整理](http://blog.csdn.net/zdk930519/article/details/54137476) 
 
 ## Jekyll
 
