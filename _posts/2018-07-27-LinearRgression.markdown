@@ -52,8 +52,10 @@ $$\mathop{argmax}\limits_{\mu} p(X;\mu) = \mathop{argmax}\limits_{\mu} \log p(X;
 假如这个参数$\mu$有一个先验概率,那么参数该怎么估计呢？
 这就是MAP要考虑的问题。 MAP优化的是一个后验概率，即给定了观测值后使$\mu$概率最大:
 
-$$\mathop{argmax}\limits_{\mu} p(\mu|X) = \mathop{argmax}\limits_{\mu} \frac{p(X|\mu)p(\mu)}{p(X)} $$
-$$= \mathop{argmax}\limits_{\mu} {p(X|\mu)p(\mu)} $$
+$$
+\mathop{argmax}\limits_{\mu} p(\mu|X) = \mathop{argmax}\limits_{\mu} \frac{p(X|\mu)p(\mu)}{p(X)} \\
+= \mathop{argmax}\limits_{\mu} {p(X|\mu)p(\mu)} 
+$$
 
 ## 线性回归概率解释
 如果有数据集(X, Y)，并且Y是有白噪声（就是与测量得到的Y与真实的Y有均值为零的高斯分布误差），目的是用新产生的X来得到Y。如果用线性模型来测量，那么有:
@@ -67,9 +69,11 @@ $$P(Y|X,\theta)=\prod_{i}\frac{1}{\epsilon\sqrt{2\pi}}exp(-\frac{||f(X_i)-Y_i||^
 
 根据决策论，就可以知道可以使概率 P(Y|X,\theta) 最大的参数 \theta^* 就是最好的参数。那么我们可以直接得到最大似然估计的最直观理解：对于一个模型，调整参数 \theta ，使得用X得到Y的概率最大。那么参数 \theta 就可以由下式得到:
 
-$$\theta^*=\mathop{argmax}\limits_{\theta}\prod_{i}\frac{1}{\epsilon\sqrt{2\pi}}exp(-\frac{||f(X_i)-Y_i||^2}{2\delta^2})$$
-$$=\mathop{argmax}\limits_{\theta}(-\frac{1}{2\delta}\sum_{i}||f(X_i)-Y_i||^2 + \sum_iln({\delta\sqrt{2\pi}}))$$
-$$=\mathop{argmax}\limits_{\theta}(\sum_{i}||f(X_i)-Y_i||^2)$$
+$$
+\theta^*=\mathop{argmax}\limits_{\theta}\prod_{i}\frac{1}{\epsilon\sqrt{2\pi}}exp(-\frac{||f(X_i)-Y_i||^2}{2\delta^2})\\
+=\mathop{argmax}\limits_{\theta}(-\frac{1}{2\delta}\sum_{i}||f(X_i)-Y_i||^2 + \sum_iln({\delta\sqrt{2\pi}}))\\
+=\mathop{argmax}\limits_{\theta}(\sum_{i}||f(X_i)-Y_i||^2)
+$$
 
 ## Ridge Regression 
 Laplace先验导出L1正则化
@@ -82,9 +86,11 @@ $$P(\theta_i)=\frac{\lambda}{2}exp(-\lambda|\theta_i|)$$
 
 在前面所说的最大似然估计事实上是假设了 \theta 是均匀分布的，也就是 P(\theta)=Constant ，我们最大化的要后验估计，即是:
 
-$$\theta^*=\mathop{argmax}\limits_{\theta}(\prod_{i}P(Y_i|X_i,\theta)\prod_iP(\theta_i))$$
-$$=\mathop{argmax}\limits_{\theta}(\sum_{i}||f(X_i)-Y_i||^2 + \sum_iln(P(\theta_i)))$$
-$$=\mathop{argmax}\limits_{\theta}(\sum_{i}||f(X_i)-Y_i||^2+\lambda\sum_i|\theta_i|)$$
+$$
+\theta^*=\mathop{argmax}\limits_{\theta}(\prod_{i}P(Y_i|X_i,\theta)\prod_iP(\theta_i))\\
+=\mathop{argmax}\limits_{\theta}(\sum_{i}||f(X_i)-Y_i||^2 + \sum_iln(P(\theta_i)))\\
+=\mathop{argmax}\limits_{\theta}(\sum_{i}||f(X_i)-Y_i||^2+\lambda\sum_i|\theta_i|)
+$$
 
 ## Lasso
 
