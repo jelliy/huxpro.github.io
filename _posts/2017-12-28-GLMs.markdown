@@ -75,7 +75,7 @@ $$
 
 下面我们看 GLM 的形式化定义，GLM 有三个假设：
 
-1. \\(y\|x;\theta\sim ExponentialFamily（\eta）\\)：固定参数θ，在给定x的情况下，y服从指数分布族（The exponential family）中以η为参数的某个分布。
+1. \\(y\|x;\theta\sim ExponentialFamily(\eta)\\)：固定参数θ，在给定x的情况下，y服从指数分布族（The exponential family）中以η为参数的某个分布。
 2. 给定一个x，我们需要的目标函数为\\(h_{\theta}(x)=E[T(y)|x]\\)，后者为该分布的期望。
 令\\(\eta=\theta^Tx\\)。
 3. 自然参数η与输入特征x呈线性相关，即
