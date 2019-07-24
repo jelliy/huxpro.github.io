@@ -1,7 +1,7 @@
 ---
 layout:       post
 title:        "申请域名"
-subtitle:     "—— KnowledgePoint"
+subtitle:     "—— Free Domain Name Application"
 date:         2019-07-24 10:00:00
 author:       "Jelliy"
 header-img:   "img/port-bg-starry sky.jpg"
